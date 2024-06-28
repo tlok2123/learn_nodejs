@@ -1,9 +1,10 @@
 const connection = require('../config/database');
-
+const { getAllUsers } = require('../services/CURDServices');
 
 let users = [];
-const getHomepage = (req, res) => {
-    return res.render('home.ejs')
+const getHomepage = async (req, res) => {
+    let results = await getAllUsers();
+    return res.render('home.ejs', { listUsers: results })
 
 }
 
