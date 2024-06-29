@@ -1,5 +1,5 @@
 const connection = require('../config/database');
-const { getAllUsers } = require('../services/CURDServices');
+const { getAllUsers, getUserById } = require('../services/CURDServices');
 
 let users = [];
 const getHomepage = async (req, res) => {
@@ -45,19 +45,30 @@ const getCreatePage = (req, res) => {
 
 const getUpdatePage = async (req, res) => {
     const userId = req.params.id;
-
-    let [results, fields] = await connection.query('select * from Users where id = ?', [userId]);
-    console.log(">>>>> chekc result", results)
-
-    let user = results && results.length > 0 ? results[0] : {};
-
-
+    let user = await getUserById(userId);
     res.render('edit.ejs', { userEdit: user })
 }
+const postUpdateUser = async (req, res) => {
+    let email = req.body.email;
+    let name = req.body.myname;
+    let city = req.body.city;
+    let userId = req.body.userId;
+    console.log('>>> email=  ', email, 'name = ', name, 'city= ', city);
+
+
+    // let [results, fields] = await connection.query(
+    //     `INSERT INTO Users (email, name, city) VALUES(?, ?, ?) `, [email, name, city]);
+    // console.log('>>> check results ', results)
+    res.send('Thanh cong');
+}
+
+
+
 module.exports = {
     getHomepage,
     getTest,
     postCreateUser,
     getCreatePage,
-    getUpdatePage
+    getUpdatePage,
+    postUpdateUser
 }

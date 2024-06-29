@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit user Page</title>
     <link rel="stylesheet" href="/css/style.css">
-
 </head>
 
 <body>
@@ -17,10 +16,14 @@
     </div>
 
     <div class="form-add-new">
-        <form action="/create-user" method="post">
+        <form action="/edit-user" method="post">
             <fieldset>
 
                 <legend> Update a user</legend>
+                <div class="input-group deochoxem">
+                    <label>Id: </label>
+                    <input type="text" name="userId" value="<%= userEdit.id %>" />
+                </div>
 
                 <div class="input-group">
                     <label>Email: </label>
