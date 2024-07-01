@@ -1,5 +1,5 @@
 const connection = require('../config/database');
-const { getAllUsers, getUserById } = require('../services/CURDServices');
+const { getAllUsers, getUserById, updateUsersById } = require('../services/CURDServices');
 
 let users = [];
 const getHomepage = async (req, res) => {
@@ -53,13 +53,10 @@ const postUpdateUser = async (req, res) => {
     let name = req.body.myname;
     let city = req.body.city;
     let userId = req.body.userId;
-    console.log('>>> email=  ', email, 'name = ', name, 'city= ', city);
+    await updateUsersById(name, city, email, userId);
 
-
-    // let [results, fields] = await connection.query(
-    //     `INSERT INTO Users (email, name, city) VALUES(?, ?, ?) `, [email, name, city]);
-    // console.log('>>> check results ', results)
-    res.send('Thanh cong');
+    // res.send('Thanh cong');
+    res.redirect('/');
 }
 
 
